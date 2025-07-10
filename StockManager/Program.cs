@@ -133,91 +133,284 @@ namespace StockManager
         }
         static void RegisterPhysicalProduct()
         {
-            Console.WriteLine("\nRegistering a Physical Product...\n");
-            Console.WriteLine("=================================");
-            Console.WriteLine("\nProduct Name: ");
-            string productName = Console.ReadLine();
-            Console.WriteLine("Product Price: ");
-            float productPrice = float.Parse(Console.ReadLine());
-            Console.WriteLine("Product Delivery Fee: ");
-            float deliveryFee = float.Parse(Console.ReadLine());
+            bool registerPhysicalProduct = false;
 
-            
+            while (!registerPhysicalProduct)
+            {
+                Console.WriteLine("\nRegistering a Physical Product...\n");
+                Console.WriteLine("=================================");
+                string productName;
+                float productPrice;
+                float deliveryFee;
+                string input;
+                string input2;
+                do
+                {
+                    Console.WriteLine("\nProduct Name: ");
+                    productName = Console.ReadLine();
 
-            Console.WriteLine("\nRegistering Physical Product:");
-            Console.WriteLine($"Name: {productName}");
-            Console.WriteLine($"Price: {productPrice}");
-            Console.WriteLine($"Delivery Fee: {deliveryFee}\n");
+                    if (string.IsNullOrWhiteSpace(productName))
+                    {
+                        Console.WriteLine("Product name cannot be empty. Please enter a valid name.");
+                    }
 
-            Console.WriteLine("Do you wish to confirm?");
-            Console.WriteLine("1. Yes\n2. No");
-            int confirm = int.Parse(Console.ReadLine());
+                } while (string.IsNullOrWhiteSpace(productName));
+
+                do
+                {
+                    Console.WriteLine("Enter the product price: ");
+                    input = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine("Input cannot be empty. Please enter a value.");
+                        continue;
+                    }
+
+                    if (!float.TryParse(input, out productPrice))
+                    {
+                        Console.WriteLine("Invalid number. Please enter a valid float value (e.g., 12.34).");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(input) || !float.TryParse(input, out productPrice));
+
+
+                do
+                {
+                    Console.WriteLine("Enter Delivery Fee: ");
+                    input2 = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine("Input cannot be empty. Please enter a value.");
+                        continue;
+                    }
+
+                    if (!float.TryParse(input2, out deliveryFee))
+                    {
+                        Console.WriteLine("Invalid number. Please enter a valid float value (e.g., 12.34).");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(input2) || !float.TryParse(input, out deliveryFee));
+
+
+
+                Console.WriteLine("\nRegistering Physical Product:");
+                Console.WriteLine($"Name: {productName}");
+                Console.WriteLine($"Price: {productPrice}");
+                Console.WriteLine($"Delivery Fee: {deliveryFee}\n");
+
+                Console.WriteLine("\nDo you wish to confirm?");
+                Console.WriteLine("1. Yes\n2. No");
+                int confirm = int.Parse(Console.ReadLine());
 
                 if (confirm == 1)
                 {
+
+                    productPrice = float.Parse(input);
+                    deliveryFee = float.Parse(input2);
+
                     PhysicalProduct physicalProduct = new PhysicalProduct(productName, productPrice, deliveryFee);
                     products.Add(physicalProduct);
                     Save();
                     Console.WriteLine("Product registered successfully");
+                    registerPhysicalProduct = true;
                 }
                 else if (confirm == 2)
                 {
                     Console.WriteLine("Operation canceled.");
+                    registerPhysicalProduct = true;
                 }
                 else
                 {
                     Console.WriteLine("Invalid option");
                 }
+            }
+            
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
         static void RegisterEbook()
         {
-            Console.WriteLine("Registering an eBook...");
-            Console.WriteLine("=================================");
-            Console.WriteLine("eBook Name: ");
-            string ebookName = Console.ReadLine();
-            Console.WriteLine("eBook Price: ");
-            float ebookPrice = float.Parse(Console.ReadLine());
-            Console.WriteLine("eBook Author: ");
-            string author = Console.ReadLine();
+            bool registerEbookProduct = false;
 
-            Ebook ebookProduct = new Ebook(ebookName, ebookPrice, author); // new object based on user info input
+            while (!registerEbookProduct)
+            {
+                Console.WriteLine("Registering an eBook...");
+                Console.WriteLine("=================================");
+                string ebookName;
+                float ebookPrice;
+                string author;
+                string input;
+                do
+                {
+                    Console.WriteLine("eBook Name: ");
+                    ebookName = Console.ReadLine();
 
-            Console.WriteLine("Registering eBook:");
-            Console.WriteLine($"Name: {ebookProduct.name}");
-            Console.WriteLine($"Price: {ebookProduct.price}");
-            Console.WriteLine($"Author: {ebookProduct.author}");
+                    if (string.IsNullOrWhiteSpace(ebookName))
+                    {
+                        Console.WriteLine("Product name cannot be empty. Please enter a valid name.");
+                    }
 
-            products.Add(ebookProduct); // adding new product object to the full products list 
-            Save();
+                } while (string.IsNullOrWhiteSpace(ebookName));
 
-            Console.WriteLine("Product registered successfully");
+                do
+                {
+                    Console.WriteLine("Enter eBook price: ");
+                    input = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine("Input cannot be empty. Please enter a value.");
+                        continue;
+                    }
+
+                    if (!float.TryParse(input, out ebookPrice))
+                    {
+                        Console.WriteLine("Invalid number. Please enter a valid float value (e.g., 12.34).");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(input) || !float.TryParse(input, out ebookPrice));
+
+                do
+                {
+                    Console.WriteLine("Author: ");
+                    author = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(author))
+                    {
+                        Console.WriteLine("Product name cannot be empty. Please enter a valid name.");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(author));
+
+
+
+                Console.WriteLine("\nRegistering eBook:");
+                Console.WriteLine($"Name: {ebookName}");
+                Console.WriteLine($"Price: {ebookPrice}");
+                Console.WriteLine($"Author: {author}");
+
+                Console.WriteLine("\nDo you wish to confirm?");
+                Console.WriteLine("1. Yes\n2. No");
+                int confirm = int.Parse(Console.ReadLine());
+
+                if (confirm == 1)
+                {
+
+                    ebookPrice = float.Parse(input);
+
+                    Ebook ebookProduct = new Ebook(ebookName, ebookPrice, author); // new object based on user info input
+                    products.Add(ebookProduct); // adding new product object to the full products list 
+                    Save();
+                    Console.WriteLine("Product registered successfully");
+                    registerEbookProduct = true;
+
+                }
+                else if (confirm == 2)
+                {
+                    Console.WriteLine("Operation canceled.");
+                    registerEbookProduct = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option");
+                }
+            }
+
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
         static void RegisterOnlineCourse()
         {
-            Console.WriteLine("Registering an Online Course...");
-            Console.WriteLine("=================================");
-            Console.WriteLine("Course Name: ");
-            string courseName = Console.ReadLine();
-            Console.WriteLine("Product Price: ");
-            float coursePrice = float.Parse(Console.ReadLine());
-            Console.WriteLine("Product Delivery Fee: ");
-            string instructor = Console.ReadLine();
+            bool registerOnlineCourse = false;
 
-            OnlineCourse onlineCourseProduct = new OnlineCourse(courseName, coursePrice, instructor);
+            while (!registerOnlineCourse)
+            {
+                Console.WriteLine("Registering an Online Course...");
+                Console.WriteLine("=================================");
+                string courseName;
+                float coursePrice;
+                string instructor;
+                string input;
+                
+                do
+                {
+                    Console.WriteLine("\nCourse Name: ");
+                    courseName = Console.ReadLine();
 
-            Console.WriteLine("Registering Online Course:");
-            Console.WriteLine($"Name: {onlineCourseProduct.name}");
-            Console.WriteLine($"Price: {onlineCourseProduct.price}");
-            Console.WriteLine($"instructor: {onlineCourseProduct.instructor}");
+                    if (string.IsNullOrWhiteSpace(courseName))
+                    {
+                        Console.WriteLine("Product name cannot be empty. Please enter a valid name.");
+                    }
 
-            products.Add(onlineCourseProduct);
-            Save();
+                } while (string.IsNullOrWhiteSpace(courseName));
 
-            Console.WriteLine("Product registered successfully");
+                do
+                {
+                    Console.WriteLine("Enter the course price: ");
+                    input = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine("Input cannot be empty. Please enter a value.");
+                        continue;
+                    }
+
+                    if (!float.TryParse(input, out coursePrice))
+                    {
+                        Console.WriteLine("Invalid number. Please enter a valid float value (e.g., 12.34).");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(input) || !float.TryParse(input, out coursePrice));
+
+
+                do
+                {
+                    Console.WriteLine("\nCourse Name: ");
+                    instructor = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(instructor))
+                    {
+                        Console.WriteLine("Product name cannot be empty. Please enter a valid name.");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(instructor));
+
+
+                
+
+                Console.WriteLine("\nRegistering Online Course:");
+                Console.WriteLine($"Name: {courseName}");
+                Console.WriteLine($"Price: {coursePrice}");
+                Console.WriteLine($"instructor: {instructor}");
+                Console.WriteLine("\nDo you wish to confirm?");
+                Console.WriteLine("1. Yes\n2. No");
+                int confirm = int.Parse(Console.ReadLine());
+
+                if (confirm == 1)
+                {
+
+                    coursePrice = float.Parse(input);
+
+                    OnlineCourse onlineCourseProduct = new OnlineCourse(courseName, coursePrice, instructor);
+                    products.Add(onlineCourseProduct);
+                    Save();
+                    Console.WriteLine("Product registered successfully");
+                    registerOnlineCourse = true;
+
+                }
+                else if (confirm == 2)
+                {
+                    Console.WriteLine("Operation canceled.");
+                    registerOnlineCourse = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option");
+                }
+            }
+               
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
