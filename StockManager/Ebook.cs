@@ -10,12 +10,14 @@ namespace StockManager
     {
         public string author;
         private int salesQuantity;
+        private int stockQuantity = 0;
 
         public Ebook(string name, float price, string author)
         {
             this.name = name;
             this.price = price;
             this.author = author;
+            stockQuantity++;
         }
 
         public void AddProduct(Product product)
@@ -25,7 +27,7 @@ namespace StockManager
 
         public void Display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Ebook Name: {name}\nPrice: {price}\nAuthor: {author}\nSales Quantity: {salesQuantity}\n");
         }
 
         public void RemoveProduct(Product product)
@@ -33,14 +35,6 @@ namespace StockManager
             throw new NotImplementedException();
         }
 
-        public void StockEntry(Product product, int quantity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StockRemoval(Product product, int quantity)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

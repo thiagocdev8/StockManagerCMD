@@ -25,7 +25,7 @@ namespace StockManager
 
         public void Display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Course Name: {name}\nPrice: {price}\nInstructor: {instructor}\nAvailable Vacancies: {availableVacancies}\n");
         }
 
         public void RemoveProduct(Product product)
@@ -33,15 +33,7 @@ namespace StockManager
             throw new NotImplementedException();
         }
 
-        public void StockEntry(Product product, int quantity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StockRemoval(Product product, int quantity)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
     
     

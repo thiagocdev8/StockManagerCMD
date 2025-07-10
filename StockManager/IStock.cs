@@ -11,8 +11,7 @@ namespace StockManager
         void Display();
         void AddProduct(Product product);
         void RemoveProduct(Product product);
-        void StockEntry(Product product, int quantity);
-        void StockRemoval(Product product, int quantity);
+        
 
     }
 }

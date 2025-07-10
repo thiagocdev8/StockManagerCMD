@@ -16,6 +16,9 @@ namespace StockManager
             StockRemoval = 5,
             Exit = 6
         }
+
+        static List<IStock> products = new List<IStock>();
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Stock Manager 8.0 developed by SolarX!");
@@ -61,5 +64,90 @@ namespace StockManager
                 }
             }
         }
+
+
+        static void RegisterProduct()
+        {
+            Console.WriteLine($"Product Registry");
+            Console.WriteLine("Choose the type of product to register:");
+            Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course");
+            // Logic to register a product
+
+            int productType = int.Parse(Console.ReadLine());
+            switch (productType)
+            {
+                case 1:
+                    RegisterPhysicalProduct(); // method that adds physical products to the stock list 
+                    break;
+                case 2:
+                    RegisterEbook(); // method that adds ebooks to the product list
+                    break;
+                case 3:
+                    RegisterOnlineCourse(); // method that adds online courses to the product list
+                    break;
+                default:
+                    Console.WriteLine("Invalid product type selected.");
+                    return;
+            }
+        }
+
+        static void RegisterPhysicalProduct()
+        {
+            Console.WriteLine("Registering a Physical Product...");
+            Console.WriteLine("=================================");
+            Console.WriteLine("Product Name: ");
+            string productName = Console.ReadLine();
+            Console.WriteLine("Product Price: ");
+            float productPrice = float.Parse(Console.ReadLine());
+            Console.WriteLine("Product Delivery Fee: ");
+            float deliveryFee = float.Parse(Console.ReadLine());
+
+            PhysicalProduct physicalProduct = new PhysicalProduct(productName, productPrice, deliveryFee);
+
+            Console.WriteLine($"Registering Physical Product: {physicalProduct.name}");
+            Console.WriteLine($"Price: {physicalProduct.price}, Delivery Fee: {physicalProduct.deliveryFee}");
+            products.Add(physicalProduct);
+            Console.WriteLine("Product registered successfully");
+        }
+        static void RegisterEbook()
+        {
+            Console.WriteLine("Registering an Ebook...");
+            Console.WriteLine("=================================");
+            Console.WriteLine("eBook Name: ");
+            string ebookName = Console.ReadLine();
+            Console.WriteLine("eBook Price: ");
+            float ebookPrice = float.Parse(Console.ReadLine());
+            Console.WriteLine("eBook Author: ");
+            string author = Console.ReadLine();
+
+            Ebook ebookProduct = new Ebook(ebookName, ebookPrice, author); // new object based on user info input
+
+            Console.WriteLine($"Registering Physical Product: {ebookProduct.name}");
+            Console.WriteLine($"Price: {ebookProduct.price} | Delivery Fee: {ebookProduct.author}");
+
+            products.Add(ebookProduct); // adding new product object to the full products list 
+            Console.WriteLine("Product registered successfully");
+        }
+
+        static void RegisterOnlineCourse()
+        {
+            Console.WriteLine("Registering an Online Course...");
+            Console.WriteLine("=================================");
+            Console.WriteLine("Course Name: ");
+            string courseName = Console.ReadLine();
+            Console.WriteLine("Product Price: ");
+            float coursePrice = float.Parse(Console.ReadLine());
+            Console.WriteLine("Product Delivery Fee: ");
+            string instructor = Console.ReadLine();
+
+            OnlineCourse onlineCourseProduct = new OnlineCourse(courseName, coursePrice, instructor);
+
+            Console.WriteLine($"Registering Physical Product: {onlineCourseProduct.name}");
+            Console.WriteLine($"Price: {onlineCourseProduct.price} | Instructor: {onlineCourseProduct.instructor}");
+
+            products.Add(onlineCourseProduct);
+            Console.WriteLine("Product registered successfully");
+        }
     }
+
 }

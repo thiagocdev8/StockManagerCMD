@@ -9,14 +9,14 @@ namespace StockManager
     internal class PhysicalProduct : Product, IStock
     {
         public float deliveryFee;
-        private int stockQuantity;
+        private int stockQuantity = 0;
 
         public PhysicalProduct(string name, float price, float deliveryFee)
         {
             this.name = name;
             this.price = price;
             this.deliveryFee = deliveryFee;
-    
+            stockQuantity++;
         }
 
         public void AddProduct(Product product)
@@ -26,20 +26,10 @@ namespace StockManager
 
         public void Display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Product Name: {name}\nPrice: {price}\nDelivery Fee: {deliveryFee}\nStock Quantity: {stockQuantity}\n"); 
         }
 
         public void RemoveProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StockEntry(Product product, int quantity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StockRemoval(Product product, int quantity)
         {
             throw new NotImplementedException();
         }
