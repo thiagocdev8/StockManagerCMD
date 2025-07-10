@@ -36,7 +36,9 @@ namespace StockManager
 
         public void RemoveProductFromStock()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("This is a digital product. Stock is unlimited\n");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
     }
     

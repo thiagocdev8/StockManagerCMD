@@ -45,7 +45,14 @@ namespace StockManager
 
         public void RemoveProductFromStock()
         {
-            throw new NotImplementedException();
+           
+            Console.WriteLine("Enter the quantity of items to remove from stock: ");
+            int quantity = int.Parse(Console.ReadLine());
+
+            stockQuantity -= quantity;
+
+            Console.WriteLine("\nRemoval registered\n");
+            Console.WriteLine($"Total balance of {name}: {stockQuantity}");
         }
 
     }  

@@ -526,6 +526,67 @@ namespace StockManager
 
             }
         }
+
+        static void StockRemoval()
+        {
+            bool removingStock = false;
+
+            while (!removingStock)
+            {
+
+                if (products.Count == 0)
+                {
+                    ListProducts();
+                    removingStock = true;
+                }
+                else
+                {
+                    Console.WriteLine("Type the ID of the product you wish to remove items from stock.\n");
+                    ListProducts();
+
+                    int id = int.Parse(Console.ReadLine());
+                    if (id >= 0 && id <= products.Count)
+                    {
+                        Console.WriteLine($"Are you sure you wish to remove items from Product ID: {id}");
+                        Console.WriteLine("1. Yes\n2. No");
+                        int confirm = int.Parse(Console.ReadLine());
+
+                        if (confirm == 1)
+                        {
+                            IStock product = products[id - 1];
+                            product.RemoveProductFromStock();
+                            Save();
+
+                            string productName = "";
+                            if (product is PhysicalProduct physProd)
+                                productName = physProd.name;
+                            else if (product is Ebook ebookProd)
+                                productName = ebookProd.name;
+                            else if (product is OnlineCourse courseProd)
+                                productName = courseProd.name;
+
+                            Console.WriteLine($"Product: {productName} stock updated.\n");
+                            removingStock = true;
+                        }
+                        else if (confirm == 2)
+                        {
+                            Console.WriteLine("Operation canceled.");
+                            removingStock = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please type a valid option.");
+                    }
+                }
+
+            }
+        }
         static void Save()
         {
             try
