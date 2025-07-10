@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
-    internal class Ebook : Product
+    internal class Ebook : Product, IStock
     {
         public string author;
         private int salesQuantity;
@@ -16,6 +16,31 @@ namespace StockManager
             this.name = name;
             this.price = price;
             this.author = author;
+        }
+
+        public void AddProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Display()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StockEntry(Product product, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StockRemoval(Product product, int quantity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

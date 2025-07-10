@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
-    internal class PhysicalProduct : Product
+    internal class PhysicalProduct : Product, IStock
     {
         public float deliveryFee;
         private int stockQuantity;
@@ -17,6 +17,31 @@ namespace StockManager
             this.price = price;
             this.deliveryFee = deliveryFee;
     
+        }
+
+        public void AddProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Display()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StockEntry(Product product, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StockRemoval(Product product, int quantity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
