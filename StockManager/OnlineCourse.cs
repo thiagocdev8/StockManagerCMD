@@ -21,23 +21,23 @@ namespace StockManager
             this.instructor = instructor;
         }
 
-        public void AddProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Display()
         {
             Console.WriteLine($"Course Name: {name}\nPrice: {price}\nInstructor: {instructor}");
             Console.WriteLine("====================");
         }
 
-        public void RemoveProduct(Product product)
+        public void AddProductToStock()
+        {
+            Console.WriteLine("This is a digital product. Stock is unlimited\n");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
+        }
+
+        public void RemoveProductFromStock()
         {
             throw new NotImplementedException();
         }
-
-        
     }
     
     

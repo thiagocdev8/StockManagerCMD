@@ -55,8 +55,10 @@ namespace StockManager
                         // Logic to remove a product
                         break;
                     case (int)Menu.StockEntry:
-                        Console.WriteLine("Entering stock for a product...");
-                        // Logic for stock entry
+                        Console.WriteLine("\nAdding stock..\n");
+                        StockEntry();
+                        Console.WriteLine("Press enter to continue");
+                        Console.ReadLine();
                         break;
                     case (int)Menu.StockRemoval:
                         Console.WriteLine("Removing stock from a product...");
@@ -88,7 +90,7 @@ namespace StockManager
             }
             else
             {
-                Console.WriteLine("\nNo Products in stock");
+                Console.WriteLine("\nNo Products registered in stock\n");
             }
 
             
@@ -100,7 +102,7 @@ namespace StockManager
             while (!registerProductRunning)
             {
                 
-                Console.WriteLine("Choose the type of product to register:");
+                Console.WriteLine("\nChoose the type of product to register:");
                 Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course\n4. Return to main menu");
 
                 int productType = int.Parse(Console.ReadLine());
@@ -131,26 +133,41 @@ namespace StockManager
         }
         static void RegisterPhysicalProduct()
         {
-            Console.WriteLine("Registering a Physical Product...");
+            Console.WriteLine("\nRegistering a Physical Product...\n");
             Console.WriteLine("=================================");
-            Console.WriteLine("Product Name: ");
+            Console.WriteLine("\nProduct Name: ");
             string productName = Console.ReadLine();
             Console.WriteLine("Product Price: ");
             float productPrice = float.Parse(Console.ReadLine());
             Console.WriteLine("Product Delivery Fee: ");
             float deliveryFee = float.Parse(Console.ReadLine());
 
-            PhysicalProduct physicalProduct = new PhysicalProduct(productName, productPrice, deliveryFee);
+            
 
-            Console.WriteLine("Registering Physical Product:");
-            Console.WriteLine($"Name: {physicalProduct.name}");
-            Console.WriteLine($"Price: {physicalProduct.price}");
-            Console.WriteLine($"Delivery Fee: {physicalProduct.deliveryFee}");
+            Console.WriteLine("\nRegistering Physical Product:");
+            Console.WriteLine($"Name: {productName}");
+            Console.WriteLine($"Price: {productPrice}");
+            Console.WriteLine($"Delivery Fee: {deliveryFee}\n");
 
-            products.Add(physicalProduct);
-            Save();
+            Console.WriteLine("Do you wish to confirm?");
+            Console.WriteLine("1. Yes\n2. No");
+            int confirm = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Product registered successfully");
+                if (confirm == 1)
+                {
+                    PhysicalProduct physicalProduct = new PhysicalProduct(productName, productPrice, deliveryFee);
+                    products.Add(physicalProduct);
+                    Save();
+                    Console.WriteLine("Product registered successfully");
+                }
+                else if (confirm == 2)
+                {
+                    Console.WriteLine("Operation canceled.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option");
+                }
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
@@ -204,7 +221,6 @@ namespace StockManager
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
-
         static void RemoveProduct()
         {
             
@@ -257,10 +273,66 @@ namespace StockManager
                 
         }
 
-            
+        static void StockEntry()
+        {
+            bool addingStock = false;
 
+            while (!addingStock)
+            {
+                
+                if (products.Count == 0)
+                {
+                    ListProducts();
+                    addingStock = true;
+                }
+                else
+                {
+                    Console.WriteLine("Type the ID of the product you wish to add stock.\n");
+                    ListProducts();
 
-        
+                    int id = int.Parse(Console.ReadLine());
+                    if (id >= 0 && id <= products.Count)
+                    {
+                        Console.WriteLine($"Are you sure you wish to update Product ID: {id}");
+                        Console.WriteLine("1. Yes\n2. No");
+                        int confirm = int.Parse(Console.ReadLine());
+
+                        if (confirm == 1)
+                        {
+                            IStock product = products[id - 1];
+                            product.AddProductToStock();
+                            Save();
+
+                            string productName = "";
+                            if (product is PhysicalProduct physProd)
+                                productName = physProd.name;
+                            else if (product is Ebook ebookProd)
+                                productName = ebookProd.name;
+                            else if (product is OnlineCourse courseProd)
+                                productName = courseProd.name;
+
+                            Console.WriteLine($"Product: {productName} stock updated.\n");
+                            addingStock = true;
+                        }
+                        else if (confirm == 2)
+                        {
+                            Console.WriteLine("Operation canceled.");
+                            addingStock = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please type a valid option.");
+                    }
+                }
+
+            }
+        }
         static void Save()
         {
             try

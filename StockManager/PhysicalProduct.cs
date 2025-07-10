@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace StockManager
     internal class PhysicalProduct : Product, IStock
     {
         public float deliveryFee { get; set; }
-        private int stockQuantity = 0;
+
+        [JsonProperty]
+        private int stockQuantity { get; set; }
 
 
         public PhysicalProduct() { }
@@ -19,12 +22,19 @@ namespace StockManager
             this.name = name;
             this.price = price;
             this.deliveryFee = deliveryFee;
-            stockQuantity++;
+            stockQuantity = 0;
         }
 
-        public void AddProduct(Product product)
+        public void AddProductToStock()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Entering stock for a product {name}.\n");
+            Console.WriteLine("Enter amount of items to add to stock: ");
+            int quantity = int.Parse(Console.ReadLine());
+
+            stockQuantity += quantity;
+
+            Console.WriteLine("\nStock entry registered\n");
+            Console.WriteLine($"Total balance of {name}: {stockQuantity}");
         }
 
         public void Display()
@@ -33,9 +43,10 @@ namespace StockManager
             Console.WriteLine("====================");
         }
 
-        public void RemoveProduct(Product product)
+        public void RemoveProductFromStock()
         {
             throw new NotImplementedException();
         }
-    }
+
+    }  
 }

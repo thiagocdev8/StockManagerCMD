@@ -11,7 +11,7 @@ namespace StockManager
     internal class Ebook : Product, IStock
     {
         public string author;
-        private int salesQuantity;
+        
 
         public Ebook() { }
         public Ebook(string name, float price, string author)
@@ -21,9 +21,11 @@ namespace StockManager
             this.author = author;
         }
 
-        public void AddProduct(Product product)
+        public void AddProductToStock()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("This is a digital product. Stock is unlimited");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
 
         public void Display()
@@ -32,11 +34,9 @@ namespace StockManager
             Console.WriteLine("====================");
         }
 
-        public void RemoveProduct(Product product)
+        public void RemoveProductFromStock()
         {
             throw new NotImplementedException();
         }
-
-       
     }
 }

@@ -9,8 +9,8 @@ namespace StockManager
     internal interface IStock
     {
         void Display();
-        void AddProduct(Product product);
-        void RemoveProduct(Product product);
+        void AddProductToStock();
+        void RemoveProductFromStock();
         
 
     }
