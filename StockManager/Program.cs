@@ -39,7 +39,8 @@ namespace StockManager
                         // Logic to list products
                         break;
                     case (int)Menu.AddProduct:
-                        Console.WriteLine("Adding a new product...");
+                        Console.WriteLine("\nAdding a new product...");
+                        RegisterProduct();
                         // Logic to add a product
                         break;
                     case (int)Menu.RemoveProduct:
@@ -69,26 +70,36 @@ namespace StockManager
         static void RegisterProduct()
         {
             Console.WriteLine($"Product Registry");
-            Console.WriteLine("Choose the type of product to register:");
-            Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course");
-            // Logic to register a product
-
-            int productType = int.Parse(Console.ReadLine());
-            switch (productType)
+            bool registerProductRunning = false;
+            
+            while (!registerProductRunning)
             {
-                case 1:
-                    RegisterPhysicalProduct(); // method that adds physical products to the stock list 
-                    break;
-                case 2:
-                    RegisterEbook(); // method that adds ebooks to the product list
-                    break;
-                case 3:
-                    RegisterOnlineCourse(); // method that adds online courses to the product list
-                    break;
-                default:
-                    Console.WriteLine("Invalid product type selected.");
-                    return;
+                
+                Console.WriteLine("Choose the type of product to register:");
+                Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course");
+
+                int productType = int.Parse(Console.ReadLine());
+
+                switch (productType)
+                {
+                    case 1:
+                        RegisterPhysicalProduct(); // method that adds physical products to the stock list 
+                        registerProductRunning = true;
+                        break;
+                    case 2:
+                        RegisterEbook(); // method that adds ebooks to the product list
+                        registerProductRunning = true;
+                        break;
+                    case 3:
+                        RegisterOnlineCourse(); // method that adds online courses to the product list
+                        registerProductRunning = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid product type selected.");
+                        continue;
+                }
             }
+            
         }
 
         static void RegisterPhysicalProduct()
