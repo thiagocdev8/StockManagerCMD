@@ -38,7 +38,10 @@ namespace StockManager
                 switch (choice)
                 {
                     case (int)Menu.ListProducts:
+                        Console.WriteLine("\nListing all products...");
                         ListProducts();
+                        Console.WriteLine("Press enter to continue");
+                        Console.ReadLine();
                         break;
                     case (int)Menu.AddProduct:
 
@@ -48,6 +51,7 @@ namespace StockManager
                         break;
                     case (int)Menu.RemoveProduct:
                         Console.WriteLine("Removing a product...");
+                        RemoveProduct();
                         // Logic to remove a product
                         break;
                     case (int)Menu.StockEntry:
@@ -73,10 +77,13 @@ namespace StockManager
         {
             if (products.Count > 0)
             {
-                Console.WriteLine("\nListing all products...");
+                int id = 1;
+                
                 foreach (IStock product in products)
                 {
+                    Console.WriteLine($"ID : {id}");
                     product.Display();
+                    id++;
                 }
             }
             else
@@ -84,9 +91,7 @@ namespace StockManager
                 Console.WriteLine("\nNo Products in stock");
             }
 
-
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
+            
         }
         static void RegisterProduct()
         {
@@ -199,6 +204,63 @@ namespace StockManager
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
+
+        static void RemoveProduct()
+        {
+            
+            bool removingProduct = false;
+
+            while (!removingProduct)
+            {
+                ListProducts();
+                if (products.Count == 0)
+                {
+                    removingProduct = true;
+                }
+                else
+                {
+                    Console.WriteLine("Type the ID of the product you wish to delete.");
+
+                    int id = int.Parse(Console.ReadLine());
+                    if (id >= 0 && id <= products.Count)
+                    {
+                        Console.WriteLine($"Are you sure you wish to delete Product ID: {id}");
+                        Console.WriteLine("1. Yes\n2. No");
+                        int confirm = int.Parse(Console.ReadLine());
+
+                        if (confirm == 1)
+                        {
+                            products.RemoveAt(id - 1);
+                            Save();
+                            Console.WriteLine("Product has been deleted.");
+                            removingProduct = true;
+                        }
+                        else if (confirm == 2)
+                        {
+                            Console.WriteLine("Operation canceled.");
+                            removingProduct = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option");
+                            break;
+                        }
+                    } 
+                    else
+                    {
+                        Console.WriteLine("Please type a valid option.");
+                    }
+                }
+                    
+            }
+
+                
+        }
+
+            
+
+
+        
         static void Save()
         {
             try

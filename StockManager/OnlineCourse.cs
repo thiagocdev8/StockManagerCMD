@@ -11,7 +11,7 @@ namespace StockManager
     internal class OnlineCourse : Product, IStock
     {
         public string instructor {  get; set; }
-        private int availableVacancies { get; set; }
+        
 
         public OnlineCourse() { }
         public OnlineCourse(string name, float price, string instructor)
@@ -28,7 +28,7 @@ namespace StockManager
 
         public void Display()
         {
-            Console.WriteLine($"Course Name: {name}\nPrice: {price}\nInstructor: {instructor}\nAvailable Vacancies: {availableVacancies}\n");
+            Console.WriteLine($"Course Name: {name}\nPrice: {price}\nInstructor: {instructor}");
             Console.WriteLine("====================");
         }
 
