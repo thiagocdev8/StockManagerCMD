@@ -13,7 +13,7 @@ namespace StockManager
         public string author;
         private int salesQuantity;
 
-        
+        public Ebook() { }
         public Ebook(string name, float price, string author)
         {
             this.name = name;

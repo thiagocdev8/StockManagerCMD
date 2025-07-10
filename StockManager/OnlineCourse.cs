@@ -13,7 +13,7 @@ namespace StockManager
         public string instructor {  get; set; }
         private int availableVacancies { get; set; }
 
-        
+        public OnlineCourse() { }
         public OnlineCourse(string name, float price, string instructor)
         {
             this.name = name;

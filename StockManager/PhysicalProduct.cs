@@ -13,7 +13,7 @@ namespace StockManager
         private int stockQuantity = 0;
 
 
-        
+        public PhysicalProduct() { }
         public PhysicalProduct(string name, float price, float deliveryFee)
         {
             this.name = name;

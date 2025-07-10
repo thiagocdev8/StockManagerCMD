@@ -42,10 +42,10 @@ namespace StockManager
                         // Logic to list products
                         break;
                     case (int)Menu.AddProduct:
+
                         Console.WriteLine("\nAdding a new product...");
                         RegisterProduct();
-                        
-                        
+
                         break;
                     case (int)Menu.RemoveProduct:
                         Console.WriteLine("Removing a product...");
@@ -73,7 +73,6 @@ namespace StockManager
 
         static void RegisterProduct()
         {
-            Console.WriteLine($"Product Registry");
             bool registerProductRunning = false;
             
             while (!registerProductRunning)
@@ -108,7 +107,6 @@ namespace StockManager
             }
             
         }
-
         static void RegisterPhysicalProduct()
         {
             Console.WriteLine("Registering a Physical Product...");
@@ -159,7 +157,6 @@ namespace StockManager
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
-
         static void RegisterOnlineCourse()
         {
             Console.WriteLine("Registering an Online Course...");
@@ -185,7 +182,6 @@ namespace StockManager
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
-
         static void Save()
         {
             try
@@ -205,7 +201,6 @@ namespace StockManager
                 Console.WriteLine($"Error saving products: {ex.Message}");
             }
         }
-        
         static void Load()
         {
             try
@@ -218,9 +213,15 @@ namespace StockManager
                     };
 
                     string json = File.ReadAllText("products.json");
-                    products = JsonConvert.DeserializeObject<List<IStock>>(json, settings);
-                    Console.WriteLine("Products loaded successfully!");
+
+                    products = JsonConvert.DeserializeObject<List<IStock>>(json, settings);  
+                } 
+                else 
+                {
+                    products = new List<IStock>();
                 }
+               
+                
             }
             catch (Exception ex)
             {
