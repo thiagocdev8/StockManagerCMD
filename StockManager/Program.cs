@@ -62,6 +62,9 @@ namespace StockManager
                         break;
                     case (int)Menu.StockRemoval:
                         Console.WriteLine("Removing stock from a product...");
+                        StockRemoval();
+                        Console.WriteLine("Press enter to continue");
+                        Console.ReadLine();
                         // Logic for stock removal
                         break;
                     case (int)Menu.Exit:
@@ -465,7 +468,6 @@ namespace StockManager
 
                 
         }
-
         static void StockEntry()
         {
             bool addingStock = false;
@@ -526,7 +528,6 @@ namespace StockManager
 
             }
         }
-
         static void StockRemoval()
         {
             bool removingStock = false;

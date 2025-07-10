@@ -30,15 +30,13 @@ namespace StockManager
         public void AddProductToStock()
         {
             Console.WriteLine("This is a digital product. Stock is unlimited\n");
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
+            
         }
 
         public void RemoveProductFromStock()
         {
             Console.WriteLine("This is a digital product. Stock is unlimited\n");
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
+            
         }
     }
     
