@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
+
+    [Serializable]
     abstract class Product
     {
-        public string name;
-        public float price;
+        public string name { get; set; }
+        public float price { get; set; }
+
+        protected Product() { }
     }
 }

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
+
+    [Serializable]
     internal class OnlineCourse : Product, IStock
     {
-        public string instructor;
-        private int availableVacancies;
+        public string instructor {  get; set; }
+        private int availableVacancies { get; set; }
 
+        
         public OnlineCourse(string name, float price, string instructor)
         {
             this.name = name;

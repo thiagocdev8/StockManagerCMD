@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Newtonsoft.Json;
 
 
 namespace StockManager
@@ -26,7 +28,8 @@ namespace StockManager
 
             bool isRunning = false;
 
-            while(!isRunning)
+            Load();
+            while (!isRunning)
             {
                 Console.WriteLine("\nPlease select an option from the menu below:");
                 Console.WriteLine("1. List Products\n2. Add Products\n3. Remove Products\n4. Stock Entry\n5. Stock Removal\n6. Exit");
@@ -41,7 +44,8 @@ namespace StockManager
                     case (int)Menu.AddProduct:
                         Console.WriteLine("\nAdding a new product...");
                         RegisterProduct();
-                        // Logic to add a product
+                        
+                        
                         break;
                     case (int)Menu.RemoveProduct:
                         Console.WriteLine("Removing a product...");
@@ -62,7 +66,7 @@ namespace StockManager
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
                         break;
-                }
+                } Console.Clear();
             }
         }
 
@@ -76,7 +80,7 @@ namespace StockManager
             {
                 
                 Console.WriteLine("Choose the type of product to register:");
-                Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course");
+                Console.WriteLine("1. Physical Product\n2. Ebook\n3. Online Course\n4. Return to main menu");
 
                 int productType = int.Parse(Console.ReadLine());
 
@@ -92,6 +96,9 @@ namespace StockManager
                         break;
                     case 3:
                         RegisterOnlineCourse(); // method that adds online courses to the product list
+                        registerProductRunning = true;
+                        break;
+                    case 4:
                         registerProductRunning = true;
                         break;
                     default:
@@ -115,14 +122,21 @@ namespace StockManager
 
             PhysicalProduct physicalProduct = new PhysicalProduct(productName, productPrice, deliveryFee);
 
-            Console.WriteLine($"Registering Physical Product: {physicalProduct.name}");
-            Console.WriteLine($"Price: {physicalProduct.price}, Delivery Fee: {physicalProduct.deliveryFee}");
+            Console.WriteLine("Registering Physical Product:");
+            Console.WriteLine($"Name: {physicalProduct.name}");
+            Console.WriteLine($"Price: {physicalProduct.price}");
+            Console.WriteLine($"Delivery Fee: {physicalProduct.deliveryFee}");
+
             products.Add(physicalProduct);
+            Save();
+
             Console.WriteLine("Product registered successfully");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
         static void RegisterEbook()
         {
-            Console.WriteLine("Registering an Ebook...");
+            Console.WriteLine("Registering an eBook...");
             Console.WriteLine("=================================");
             Console.WriteLine("eBook Name: ");
             string ebookName = Console.ReadLine();
@@ -133,11 +147,17 @@ namespace StockManager
 
             Ebook ebookProduct = new Ebook(ebookName, ebookPrice, author); // new object based on user info input
 
-            Console.WriteLine($"Registering Physical Product: {ebookProduct.name}");
-            Console.WriteLine($"Price: {ebookProduct.price} | Delivery Fee: {ebookProduct.author}");
+            Console.WriteLine("Registering eBook:");
+            Console.WriteLine($"Name: {ebookProduct.name}");
+            Console.WriteLine($"Price: {ebookProduct.price}");
+            Console.WriteLine($"Author: {ebookProduct.author}");
 
             products.Add(ebookProduct); // adding new product object to the full products list 
+            Save();
+
             Console.WriteLine("Product registered successfully");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
 
         static void RegisterOnlineCourse()
@@ -153,12 +173,61 @@ namespace StockManager
 
             OnlineCourse onlineCourseProduct = new OnlineCourse(courseName, coursePrice, instructor);
 
-            Console.WriteLine($"Registering Physical Product: {onlineCourseProduct.name}");
-            Console.WriteLine($"Price: {onlineCourseProduct.price} | Instructor: {onlineCourseProduct.instructor}");
+            Console.WriteLine("Registering Online Course:");
+            Console.WriteLine($"Name: {onlineCourseProduct.name}");
+            Console.WriteLine($"Price: {onlineCourseProduct.price}");
+            Console.WriteLine($"instructor: {onlineCourseProduct.instructor}");
 
             products.Add(onlineCourseProduct);
+            Save();
+
             Console.WriteLine("Product registered successfully");
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
+
+        static void Save()
+        {
+            try
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                    Formatting = Formatting.Indented
+                };
+
+                string json = JsonConvert.SerializeObject(products, settings);
+                File.WriteAllText("products.json", json);
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving products: {ex.Message}");
+            }
+        }
+        
+        static void Load()
+        {
+            try
+            {
+                if (File.Exists("products.json"))
+                {
+                    var settings = new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    };
+
+                    string json = File.ReadAllText("products.json");
+                    products = JsonConvert.DeserializeObject<List<IStock>>(json, settings);
+                    Console.WriteLine("Products loaded successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading products: {ex.Message}");
+            }
+        }
+
     }
 
 }
