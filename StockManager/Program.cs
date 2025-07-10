@@ -38,8 +38,7 @@ namespace StockManager
                 switch (choice)
                 {
                     case (int)Menu.ListProducts:
-                        Console.WriteLine("Listing all products...");
-                        // Logic to list products
+                        ListProducts();
                         break;
                     case (int)Menu.AddProduct:
 
@@ -70,7 +69,25 @@ namespace StockManager
             }
         }
 
+        static void ListProducts()
+        {
+            if (products.Count > 0)
+            {
+                Console.WriteLine("\nListing all products...");
+                foreach (IStock product in products)
+                {
+                    product.Display();
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nNo Products in stock");
+            }
 
+
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
+        }
         static void RegisterProduct()
         {
             bool registerProductRunning = false;

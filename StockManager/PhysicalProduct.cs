@@ -29,7 +29,8 @@ namespace StockManager
 
         public void Display()
         {
-            Console.WriteLine($"Product Name: {name}\nPrice: {price}\nDelivery Fee: {deliveryFee}\nStock Quantity: {stockQuantity}\n"); 
+            Console.WriteLine($"Product Name: {name}\nPrice: {price}\nDelivery Fee: {deliveryFee}\nStock Quantity: {stockQuantity}\n");
+            Console.WriteLine("====================");
         }
 
         public void RemoveProduct(Product product)

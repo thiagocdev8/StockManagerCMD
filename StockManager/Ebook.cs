@@ -29,6 +29,7 @@ namespace StockManager
         public void Display()
         {
             Console.WriteLine($"Ebook Name: {name}\nPrice: {price}\nAuthor: {author}\nSales Quantity: {salesQuantity}\n");
+            Console.WriteLine("====================");
         }
 
         public void RemoveProduct(Product product)
