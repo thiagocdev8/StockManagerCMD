@@ -85,7 +85,7 @@ Now, I’m sharing it in case it helps someone else too.
 👩‍💻 Author
 SolarX
 🎯 Built with care for real-world use — powered by C#
-🔗 [Your GitHub Profile Link]
+
 
 📝 License
 Feel free to use and modify for personal or educational purposes.
