@@ -2,6 +2,7 @@
 
 Welcome to **Stock Manager 8.0**, a simple and efficient stock management console application written in C#.  
 This project was originally built to help my mom manage inventory for her online shop — but it can be easily adapted for any small business or learning purpose.
+- Project used as an assignment for Algorithms 2 / web app in production
 
 ---
 
